@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
+from dotenv import load_dotenv
 import logging
 import os
 
+load_dotenv()
+
 app = Flask(__name__)
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-demo-secret-key")
 
 # Use environment variable for production.
 # The default value is only for local prototype/demo use.

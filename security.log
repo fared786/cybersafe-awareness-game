@@ -124,3 +124,21 @@
 2026-05-24 17:54:23,030 - INFO - 127.0.0.1 - - [24/May/2026 17:54:23] "[32mGET /logout HTTP/1.1[0m" 302 -
 2026-05-24 17:54:23,039 - INFO - 127.0.0.1 - - [24/May/2026 17:54:23] "GET /login HTTP/1.1" 200 -
 2026-05-24 17:54:23,061 - INFO - 127.0.0.1 - - [24/May/2026 17:54:23] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:13:53,472 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-24 18:13:53,473 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-24 18:14:03,351 - INFO - 127.0.0.1 - - [24/May/2026 18:14:03] "[32mGET / HTTP/1.1[0m" 302 -
+2026-05-24 18:14:03,366 - INFO - 127.0.0.1 - - [24/May/2026 18:14:03] "GET /login HTTP/1.1" 200 -
+2026-05-24 18:14:03,376 - INFO - 127.0.0.1 - - [24/May/2026 18:14:03] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:14:23,455 - INFO - Successful password check for user: student1
+2026-05-24 18:14:23,458 - INFO - 127.0.0.1 - - [24/May/2026 18:14:23] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-05-24 18:14:23,462 - INFO - 127.0.0.1 - - [24/May/2026 18:14:23] "GET /twofa HTTP/1.1" 200 -
+2026-05-24 18:14:23,486 - INFO - 127.0.0.1 - - [24/May/2026 18:14:23] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:14:27,303 - INFO - 2FA success for user: student1
+2026-05-24 18:14:27,304 - INFO - 127.0.0.1 - - [24/May/2026 18:14:27] "[32mPOST /twofa HTTP/1.1[0m" 302 -
+2026-05-24 18:14:27,323 - INFO - 127.0.0.1 - - [24/May/2026 18:14:27] "GET /student/dashboard HTTP/1.1" 200 -
+2026-05-24 18:14:27,355 - INFO - 127.0.0.1 - - [24/May/2026 18:14:27] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:14:29,634 - INFO - User logged out: student1
+2026-05-24 18:14:29,634 - INFO - 127.0.0.1 - - [24/May/2026 18:14:29] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-05-24 18:14:29,647 - INFO - 127.0.0.1 - - [24/May/2026 18:14:29] "GET /login HTTP/1.1" 200 -
+2026-05-24 18:14:29,671 - INFO - 127.0.0.1 - - [24/May/2026 18:14:29] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
