@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CyberSafe Awareness Game - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>CyberSafe Awareness Game</h1>
+            <p class="subtitle">Secure Login Portal</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="message {{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Enter username" required>
+
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter password" required>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <div class="demo-box">
+                <p><strong>Demo Student:</strong> student1 / Password123!</p>
+                <p><strong>Demo Teacher:</strong> teacher1 / Password123!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Two-Factor Authentication</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Two-Factor Authentication</h1>
+            <p class="subtitle">Enter the demo 2FA code to continue.</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="message {{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <label>2FA Code</label>
+                <input type="text" name="code" placeholder="Enter 123456" required>
+
+                <button type="submit">Verify</button>
+            </form>
+
+            <div class="demo-box">
+                <p><strong>Demo 2FA Code:</strong> 123456</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
