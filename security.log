@@ -142,3 +142,42 @@
 2026-05-24 18:14:29,634 - INFO - 127.0.0.1 - - [24/May/2026 18:14:29] "[32mGET /logout HTTP/1.1[0m" 302 -
 2026-05-24 18:14:29,647 - INFO - 127.0.0.1 - - [24/May/2026 18:14:29] "GET /login HTTP/1.1" 200 -
 2026-05-24 18:14:29,671 - INFO - 127.0.0.1 - - [24/May/2026 18:14:29] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:28:29,981 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-24 18:28:29,981 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-24 18:28:37,298 - INFO - 127.0.0.1 - - [24/May/2026 18:28:37] "GET /login HTTP/1.1" 200 -
+2026-05-24 18:28:37,327 - INFO - 127.0.0.1 - - [24/May/2026 18:28:37] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:28:50,358 - WARNING - Failed login attempt for username: student1
+2026-05-24 18:28:50,359 - INFO - 127.0.0.1 - - [24/May/2026 18:28:50] "POST /login HTTP/1.1" 200 -
+2026-05-24 18:28:50,373 - INFO - 127.0.0.1 - - [24/May/2026 18:28:50] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:41:28,771 - INFO - Successful password check for user: student1
+2026-05-24 18:41:28,774 - INFO - 127.0.0.1 - - [24/May/2026 18:41:28] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-05-24 18:41:28,781 - INFO - 127.0.0.1 - - [24/May/2026 18:41:28] "GET /twofa HTTP/1.1" 200 -
+2026-05-24 18:41:28,802 - INFO - 127.0.0.1 - - [24/May/2026 18:41:28] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:41:32,936 - INFO - 2FA success for user: student1
+2026-05-24 18:41:32,937 - INFO - 127.0.0.1 - - [24/May/2026 18:41:32] "[32mPOST /twofa HTTP/1.1[0m" 302 -
+2026-05-24 18:41:32,958 - INFO - 127.0.0.1 - - [24/May/2026 18:41:32] "GET /student/dashboard HTTP/1.1" 200 -
+2026-05-24 18:41:32,978 - INFO - 127.0.0.1 - - [24/May/2026 18:41:32] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:41:34,478 - INFO - 127.0.0.1 - - [24/May/2026 18:41:34] "GET /quiz HTTP/1.1" 200 -
+2026-05-24 18:41:34,501 - INFO - 127.0.0.1 - - [24/May/2026 18:41:34] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:41:51,940 - INFO - Quiz completed by student1. Score: 9/15
+2026-05-24 18:41:51,941 - INFO - 127.0.0.1 - - [24/May/2026 18:41:51] "POST /quiz HTTP/1.1" 200 -
+2026-05-24 18:41:51,967 - INFO - 127.0.0.1 - - [24/May/2026 18:41:51] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:41:56,140 - INFO - 127.0.0.1 - - [24/May/2026 18:41:56] "GET /student/dashboard HTTP/1.1" 200 -
+2026-05-24 18:41:56,185 - INFO - 127.0.0.1 - - [24/May/2026 18:41:56] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:41:58,900 - INFO - User logged out: student1
+2026-05-24 18:41:58,901 - INFO - 127.0.0.1 - - [24/May/2026 18:41:58] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-05-24 18:41:58,919 - INFO - 127.0.0.1 - - [24/May/2026 18:41:58] "GET /login HTTP/1.1" 200 -
+2026-05-24 18:41:58,937 - INFO - 127.0.0.1 - - [24/May/2026 18:41:58] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:42:06,179 - INFO - Successful password check for user: teacher1
+2026-05-24 18:42:06,179 - INFO - 127.0.0.1 - - [24/May/2026 18:42:06] "[32mPOST /login HTTP/1.1[0m" 302 -
+2026-05-24 18:42:06,181 - INFO - 127.0.0.1 - - [24/May/2026 18:42:06] "GET /twofa HTTP/1.1" 200 -
+2026-05-24 18:42:06,200 - INFO - 127.0.0.1 - - [24/May/2026 18:42:06] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:42:09,859 - INFO - 2FA success for user: teacher1
+2026-05-24 18:42:09,859 - INFO - 127.0.0.1 - - [24/May/2026 18:42:09] "[32mPOST /twofa HTTP/1.1[0m" 302 -
+2026-05-24 18:42:09,880 - INFO - 127.0.0.1 - - [24/May/2026 18:42:09] "GET /teacher/dashboard HTTP/1.1" 200 -
+2026-05-24 18:42:09,904 - INFO - 127.0.0.1 - - [24/May/2026 18:42:09] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-24 18:42:15,238 - INFO - User logged out: teacher1
+2026-05-24 18:42:15,240 - INFO - 127.0.0.1 - - [24/May/2026 18:42:15] "[32mGET /logout HTTP/1.1[0m" 302 -
+2026-05-24 18:42:15,255 - INFO - 127.0.0.1 - - [24/May/2026 18:42:15] "GET /login HTTP/1.1" 200 -
+2026-05-24 18:42:15,284 - INFO - 127.0.0.1 - - [24/May/2026 18:42:15] "[36mGET /static/style.css HTTP/1.1[0m" 304 -

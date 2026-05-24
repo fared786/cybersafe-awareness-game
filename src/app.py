@@ -3,6 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
 import logging
 import os
+import sqlite3
+
 
 load_dotenv()
 
@@ -222,6 +224,48 @@ quiz_questions = [
     }
 ]
 
+DATABASE = "cybersafe.db"
+
+def get_db_connection():
+    connection = sqlite3.connect(DATABASE)
+    connection.row_factory = sqlite3.Row
+    return connection
+
+
+def init_db():
+    connection = get_db_connection()
+    connection.execute("""
+        CREATE TABLE IF NOT EXISTS progress (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            category TEXT NOT NULL,
+            score INTEGER NOT NULL,
+            total INTEGER NOT NULL,
+            completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    connection.commit()
+    connection.close()
+
+
+def save_progress(username, category, score, total):
+    connection = get_db_connection()
+    connection.execute(
+        "INSERT INTO progress (username, category, score, total) VALUES (?, ?, ?, ?)",
+        (username, category, score, total)
+    )
+    connection.commit()
+    connection.close()
+
+
+def get_all_progress():
+    connection = get_db_connection()
+    progress = connection.execute(
+        "SELECT username, category, score, total, completed_at FROM progress ORDER BY completed_at DESC"
+    ).fetchall()
+    connection.close()
+    return progress
+
 # Demo users for prototype
 # Password for both users: Password123!
 users = {
@@ -325,7 +369,7 @@ def quiz():
 
         username = session.get("user")
         users[username]["score"] = score
-
+        save_progress(username, "Cybersecurity Awareness Quiz", score, len(quiz_questions))
         logging.info("Quiz completed by %s. Score: %s/15", username, score)
 
         return render_template(
@@ -366,6 +410,12 @@ def teacher_dashboard():
 
     return render_template("teacher_dashboard.html", users=users)
 
+    progress_records = get_all_progress()
+    return render_template(
+        "teacher_dashboard.html",
+        users=users,
+        progress_records=progress_records
+    )
 
 @app.route("/logout")
 def logout():
@@ -373,8 +423,15 @@ def logout():
     session.clear()
     logging.info("User logged out: %s", user)
     return redirect(url_for("login"))
+    progress_records = get_all_progress()
+    return render_template(
+        "teacher_dashboard.html",
+        users=users,
+        progress_records=progress_records
+    )
 
 
 if __name__ == "__main__":
+    init_db()
     debug_mode = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
     app.run(debug=debug_mode)

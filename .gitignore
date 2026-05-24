@@ -14,3 +14,5 @@ security.log
 
 # Pytest cache
 .pytest_cache/
+
+cybersafe.db

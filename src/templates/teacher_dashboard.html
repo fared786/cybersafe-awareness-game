@@ -11,12 +11,13 @@
             <h1>Teacher Dashboard</h1>
             <p class="subtitle">Student progress monitoring panel.</p>
 
+            <h2>Current User Summary</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Username</th>
                         <th>Role</th>
-                        <th>Score</th>
+                        <th>Latest Score</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,32 @@
                         <td>{{ username }}</td>
                         <td>{{ data.role }}</td>
                         <td>{{ data.score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h2>Saved Quiz Progress</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Quiz Category</th>
+                        <th>Score</th>
+                        <th>Completed At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in progress_records %}
+                    <tr>
+                        <td>{{ record.username }}</td>
+                        <td>{{ record.category }}</td>
+                        <td>{{ record.score }}/{{ record.total }}</td>
+                        <td>{{ record.completed_at }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">No quiz progress saved yet.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
