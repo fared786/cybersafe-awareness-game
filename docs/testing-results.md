@@ -32,3 +32,15 @@ Result:
 
 ```text
 5 passed
+
+
+## 9. Incident Response Simulation Result
+
+A simulated failed-login incident was performed to test monitoring and response capability.
+
+| Incident Test | Expected Result | Actual Result | Status | |---|---|---|---|
+| Failed login attempt | Event should be logged | Event appeared in security.log | Passed |
+| Teacher views logs | Recent security events should be visible | Logs displayed in teacher monitoring page | Passed |
+| Unauthorized dashboard access | Access should be denied | User redirected to login page | Passed |
+
+The incident simulation confirmed that the application can detect and record basic authentication-related security events.

@@ -5,26 +5,21 @@ import logging
 import os
 import sqlite3
 
-
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-demo-secret-key")
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-demo-secret-key")  # nosec B105
 
-# Use environment variable for production.
-# The default value is only for local prototype/demo use.
-app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")  # nosec B105
-
-# Basic logging for security monitoring evidence
 logging.basicConfig(
     filename="security.log",
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# Demo constants for educational prototype
-DEMO_PASSWORD = os.environ.get("DEMO_PASSWORD", "Password123!")  # nosec B105
-DEMO_2FA_CODE = os.environ.get("DEMO_2FA_CODE", "123456")  # nosec B105
+DEMO_PASSWORD = os.getenv("DEMO_PASSWORD", "Password123!")  # nosec B105
+DEMO_2FA_CODE = os.getenv("DEMO_2FA_CODE", "123456")  # nosec B105
+
+DATABASE = "cybersafe.db"
 
 quiz_questions = [
     {
@@ -224,7 +219,19 @@ quiz_questions = [
     }
 ]
 
-DATABASE = "cybersafe.db"
+users = {
+    "student1": {
+        "password": generate_password_hash(DEMO_PASSWORD),
+        "role": "student",
+        "score": 0
+    },
+    "teacher1": {
+        "password": generate_password_hash(DEMO_PASSWORD),
+        "role": "teacher",
+        "score": 0
+    }
+}
+
 
 def get_db_connection():
     connection = sqlite3.connect(DATABASE)
@@ -261,25 +268,24 @@ def save_progress(username, category, score, total):
 def get_all_progress():
     connection = get_db_connection()
     progress = connection.execute(
-        "SELECT username, category, score, total, completed_at FROM progress ORDER BY completed_at DESC"
+        """
+        SELECT username, category, score, total, completed_at
+        FROM progress
+        ORDER BY completed_at DESC
+        """
     ).fetchall()
     connection.close()
     return progress
 
-# Demo users for prototype
-# Password for both users: Password123!
-users = {
-    "student1": {
-        "password": generate_password_hash(DEMO_PASSWORD),
-        "role": "student",
-        "score": 0
-    },
-    "teacher1": {
-        "password": generate_password_hash(DEMO_PASSWORD),
-        "role": "teacher",
-        "score": 0
-    }
-}
+
+def get_badge(score):
+    if score >= 13:
+        return "Cybersecurity Champion"
+    if score >= 10:
+        return "Security Smart Learner"
+    if score >= 7:
+        return "Cyber Awareness Beginner"
+    return "Needs More Practice"
 
 
 @app.route("/")
@@ -314,7 +320,6 @@ def twofa():
     if request.method == "POST":
         code = request.form.get("code", "").strip()
 
-        # Demo 2FA code for educational prototype
         if code == DEMO_2FA_CODE:
             username = session.pop("pending_user")
             session["user"] = username
@@ -324,6 +329,7 @@ def twofa():
 
             if session["role"] == "teacher":
                 return redirect(url_for("teacher_dashboard"))
+
             return redirect(url_for("student_dashboard"))
 
         logging.warning("Failed 2FA attempt")
@@ -369,14 +375,29 @@ def quiz():
 
         username = session.get("user")
         users[username]["score"] = score
-        save_progress(username, "Cybersecurity Awareness Quiz", score, len(quiz_questions))
-        logging.info("Quiz completed by %s. Score: %s/15", username, score)
+
+        save_progress(
+            username,
+            "Cybersecurity Awareness Quiz",
+            score,
+            len(quiz_questions)
+        )
+
+        badge = get_badge(score)
+
+        logging.info(
+            "Quiz completed by %s. Score: %s/%s",
+            username,
+            score,
+            len(quiz_questions)
+        )
 
         return render_template(
             "quiz.html",
             questions=quiz_questions,
             feedback=feedback,
             score=score,
+            badge=badge,
             submitted=True
         )
 
@@ -385,6 +406,7 @@ def quiz():
         questions=quiz_questions,
         feedback=None,
         score=None,
+        badge=None,
         submitted=False
     )
 
@@ -408,15 +430,15 @@ def teacher_dashboard():
         flash("Access denied. Teacher role required.", "error")
         return redirect(url_for("login"))
 
-    return render_template("teacher_dashboard.html", users=users)
-
     progress_records = get_all_progress()
+
     return render_template(
         "teacher_dashboard.html",
         users=users,
         progress_records=progress_records
     )
-    
+
+
 @app.route("/teacher/security-logs")
 def security_logs():
     if session.get("role") != "teacher":
@@ -426,12 +448,13 @@ def security_logs():
     logs = []
 
     try:
-        with open("security.log", "r") as log_file:
+        with open("security.log", "r", encoding="utf-8") as log_file:
             logs = log_file.readlines()[-20:]
     except FileNotFoundError:
         logs = ["No security logs available yet."]
 
     return render_template("security_logs.html", logs=logs)
+
 
 @app.route("/logout")
 def logout():
@@ -439,15 +462,9 @@ def logout():
     session.clear()
     logging.info("User logged out: %s", user)
     return redirect(url_for("login"))
-    progress_records = get_all_progress()
-    return render_template(
-        "teacher_dashboard.html",
-        users=users,
-        progress_records=progress_records
-    )
 
 
 if __name__ == "__main__":
     init_db()
-    debug_mode = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
+    debug_mode = os.getenv("FLASK_DEBUG", "false").lower() == "true"
     app.run(debug=debug_mode)

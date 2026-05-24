@@ -9,11 +9,18 @@
     <div class="page-container">
         <div class="quiz-card">
             <h1>Cybersecurity Awareness Quiz</h1>
-            <p class="subtitle">Complete 15 challenges across phishing, password security, and social engineering.</p>
+            <p class="subtitle">
+                Complete 15 challenges across phishing, password security, and social engineering.
+            </p>
 
             {% if submitted %}
                 <div class="score-box">
                     <h2>Your Score: {{ score }}/15</h2>
+
+                    {% if badge %}
+                        <h3>Achievement Badge: {{ badge }}</h3>
+                    {% endif %}
+
                     <p>
                         {% if score >= 12 %}
                             Excellent cybersecurity awareness!
@@ -38,7 +45,6 @@
                 {% endfor %}
 
                 <a class="button-link" href="{{ url_for('student_dashboard') }}">Back to Dashboard</a>
-
             {% else %}
                 <form method="POST">
                     {% for question in questions %}
