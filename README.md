@@ -87,3 +87,66 @@ Pipeline stages:
 
 
 Build → Security Scan → Test → Deploy Simulation
+
+## Team Members and Contributions
+
+| Team Member | Role | Main Contributions |
+|---|---|---|
+| Farhad Hossain | Lead Developer / Security Tester / DevSecOps Implementer | Project setup, Flask application development, login system, 2FA flow, RBAC, quiz system, scoring, achievement badges, SQLite progress tracking, security logs page, security headers, automated pytest tests, GitHub Actions CI/CD pipeline, Bandit SAST evidence, pip-audit dependency scanning evidence, incident response simulation, security remediation, screenshots, and technical evidence |
+| Ujwal paudel | Documentation / Testing Support | Supported documentation review, screenshots, user testing, quiz content review, and project evidence checking |
+| Team Member 3 | Presentation / Review Support | Supported presentation preparation, slide review, demo flow practice, and final project checking |
+
+## Key Deliverables Completed
+
+| Requirement | Status | Evidence |
+|---|---|---|
+| GitHub Repository | Completed | Source code, documentation, tests, CI/CD files |
+| Required Structure | Completed | `/src`, `/docs`, `/tests`, `/ci-cd`, `README.md` |
+| Authentication | Completed | Login system with hashed passwords |
+| Authorization | Completed | Student and Teacher roles |
+| 2FA | Completed | Demo two-factor authentication flow |
+| Security Testing | Completed | Bandit, pip-audit, pytest |
+| CI/CD Pipeline | Completed | GitHub Actions workflow |
+| Documentation | Completed | Threat model, testing results, incident response simulation |
+| Monitoring | Completed | Teacher security logs page |
+| Incident Response | Completed | Failed-login incident simulation |
+| Presentation Evidence | Ready | Screenshots and live demo flow |
+
+## Live Demo Flow
+
+During the presentation, the live demo will follow this sequence:
+
+1. Open the CyberSafe Awareness Game login page.
+2. Log in as a student using demo credentials.
+3. Complete the 2FA verification step.
+4. Open the student dashboard.
+5. Start the cybersecurity quiz.
+6. Submit answers and show score, instant feedback, and achievement badge.
+7. Log out.
+8. Log in as teacher.
+9. Show teacher dashboard with saved student progress.
+10. Open security logs page.
+11. Show GitHub Actions DevSecOps pipeline.
+12. Show automated testing and security scan evidence.
+
+## Security Testing Summary
+
+| Tool / Method | Purpose |
+|---|---|
+| Pytest | Automated functional testing |
+| Bandit | Static Application Security Testing for Python code |
+| pip-audit | Dependency vulnerability scanning |
+| Manual Testing | Login, 2FA, RBAC, quiz, dashboard and monitoring validation |
+| Security Headers Test | Checks browser-side security configuration |
+
+## Future Improvements
+
+Future versions of this project could include:
+
+- Real 2FA using PyOTP or Google Authenticator
+- Persistent user account database
+- Account lockout after repeated failed login attempts
+- Email alerts for suspicious activity
+- More quiz categories and difficulty levels
+- Student progress charts
+- Deployment to a secure cloud platform
