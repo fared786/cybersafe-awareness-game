@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cybersecurity Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <div class="quiz-card">
+            <h1>Cybersecurity Awareness Quiz</h1>
+            <p class="subtitle">Complete 15 challenges across phishing, password security, and social engineering.</p>
+
+            {% if submitted %}
+                <div class="score-box">
+                    <h2>Your Score: {{ score }}/15</h2>
+                    <p>
+                        {% if score >= 12 %}
+                            Excellent cybersecurity awareness!
+                        {% elif score >= 8 %}
+                            Good effort. Review the explanations to improve.
+                        {% else %}
+                            Keep practising. Cybersecurity awareness improves with repetition.
+                        {% endif %}
+                    </p>
+                </div>
+
+                <h2>Instant Feedback</h2>
+
+                {% for item in feedback %}
+                    <div class="feedback-box {% if item.is_correct %}correct{% else %}incorrect{% endif %}">
+                        <h3>Question {{ loop.index }}</h3>
+                        <p><strong>{{ item.question }}</strong></p>
+                        <p><strong>Your answer:</strong> {{ item.selected }}</p>
+                        <p><strong>Correct answer:</strong> {{ item.correct }}</p>
+                        <p><strong>Explanation:</strong> {{ item.explanation }}</p>
+                    </div>
+                {% endfor %}
+
+                <a class="button-link" href="{{ url_for('student_dashboard') }}">Back to Dashboard</a>
+
+            {% else %}
+                <form method="POST">
+                    {% for question in questions %}
+                        <div class="question-box">
+                            <p class="category">{{ question.category }}</p>
+                            <h3>{{ loop.index }}. {{ question.question }}</h3>
+
+                            {% for option in question.options %}
+                                <label class="option">
+                                    <input type="radio" name="{{ question.id }}" value="{{ option }}" required>
+                                    {{ option }}
+                                </label>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit">Submit Quiz</button>
+                </form>
+
+                <a class="logout-link" href="{{ url_for('student_dashboard') }}">Back to Dashboard</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
