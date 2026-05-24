@@ -416,6 +416,22 @@ def teacher_dashboard():
         users=users,
         progress_records=progress_records
     )
+    
+@app.route("/teacher/security-logs")
+def security_logs():
+    if session.get("role") != "teacher":
+        flash("Access denied. Teacher role required.", "error")
+        return redirect(url_for("login"))
+
+    logs = []
+
+    try:
+        with open("security.log", "r") as log_file:
+            logs = log_file.readlines()[-20:]
+    except FileNotFoundError:
+        logs = ["No security logs available yet."]
+
+    return render_template("security_logs.html", logs=logs)
 
 @app.route("/logout")
 def logout():

@@ -199,3 +199,19 @@ th {
     font-weight: bold;
     text-decoration: none;
 }
+.log-box {
+    background: #102a43;
+    color: #d9e2ec;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-family: monospace;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.log-box p {
+    border-bottom: 1px solid #334e68;
+    padding-bottom: 8px;
+    font-size: 13px;
+}

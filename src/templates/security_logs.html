@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Monitoring Logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card wide-card">
+            <h1>Security Monitoring Logs</h1>
+            <p class="subtitle">Recent authentication, 2FA, logout, and quiz activity events.</p>
+
+            <div class="info-box">
+                <h2>Monitoring Purpose</h2>
+                <p>
+                    This page supports incident detection by showing recent login attempts,
+                    failed authentication events, 2FA activity, and quiz completion logs.
+                </p>
+            </div>
+
+            <div class="log-box">
+                {% for log in logs %}
+                    <p>{{ log }}</p>
+                {% endfor %}
+            </div>
+
+            <a class="button-link" href="{{ url_for('teacher_dashboard') }}">Back to Teacher Dashboard</a>
+            <a class="logout-link" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
