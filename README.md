@@ -46,3 +46,44 @@ README.md - Setup and usage instructions
 ```bash
 git clone https://github.com/fared786/cybersafe-awareness-game
 cd cybersafe-awareness-game
+
+
+
+# Project Summary - CyberSafe Awareness Game
+
+## Project Objective
+
+CyberSafe Awareness Game is a web-based cybersecurity awareness training prototype. The objective is to teach users about phishing, password security, and social engineering through interactive quiz challenges.
+
+## Why This Project Was Selected
+
+This project was selected because it is safe, practical, achievable within the available time, and directly connected to cybersecurity education. It does not require testing against real external systems, which reduces ethical and technical risk.
+
+## Implemented Features
+
+- Secure login system
+- Password hashing
+- Two-factor authentication demo
+- Role-based access control
+- Student dashboard
+- Teacher dashboard
+- 15 cybersecurity awareness quiz challenges
+- Instant feedback
+- Score calculation
+- Achievement badges
+- SQLite progress tracking
+- Security event logging
+- Teacher security monitoring page
+- Incident response simulation
+- Security headers
+- Automated testing
+- DevSecOps GitHub Actions pipeline
+
+## DevSecOps Implementation
+
+The project follows DevSecOps principles by integrating security into development, testing, and deployment simulation.
+
+Pipeline stages:
+
+```text
+Build → Security Scan → Test → Deploy Simulation
