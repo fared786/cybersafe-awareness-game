@@ -38,3 +38,11 @@ awareness, and secure browsing practices.
 /ci-cd    - Pipeline notes and DevSecOps documentation
 README.md - Setup and usage instructions
 ```
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/fared786/cybersafe-awareness-game
+cd cybersafe-awareness-game
