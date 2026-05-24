@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 import logging
+import os
 
 app = Flask(__name__)
-app.secret_key = "change-this-secret-key-for-production"
+
+# Use environment variable for production.
+# The default value is only for local prototype/demo use.
+app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")  # nosec B105
 
 # Basic logging for security monitoring evidence
 logging.basicConfig(
@@ -11,6 +15,10 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
+
+# Demo constants for educational prototype
+DEMO_PASSWORD = os.environ.get("DEMO_PASSWORD", "Password123!")  # nosec B105
+DEMO_2FA_CODE = os.environ.get("DEMO_2FA_CODE", "123456")  # nosec B105
 
 quiz_questions = [
     {
@@ -214,12 +222,12 @@ quiz_questions = [
 # Password for both users: Password123!
 users = {
     "student1": {
-        "password": generate_password_hash("Password123!"),
+        "password": generate_password_hash(DEMO_PASSWORD),
         "role": "student",
         "score": 0
     },
     "teacher1": {
-        "password": generate_password_hash("Password123!"),
+        "password": generate_password_hash(DEMO_PASSWORD),
         "role": "teacher",
         "score": 0
     }
@@ -241,10 +249,10 @@ def login():
 
         if user and check_password_hash(user["password"], password):
             session["pending_user"] = username
-            logging.info(f"Successful password check for user: {username}")
+            logging.info("Successful password check for user: %s", username)
             return redirect(url_for("twofa"))
 
-        logging.warning(f"Failed login attempt for username: {username}")
+        logging.warning("Failed login attempt for username: %s", username)
         flash("Invalid username or password.", "error")
 
     return render_template("login.html")
@@ -259,12 +267,12 @@ def twofa():
         code = request.form.get("code", "").strip()
 
         # Demo 2FA code for educational prototype
-        if code == "123456":
+        if code == DEMO_2FA_CODE:
             username = session.pop("pending_user")
             session["user"] = username
             session["role"] = users[username]["role"]
 
-            logging.info(f"2FA success for user: {username}")
+            logging.info("2FA success for user: %s", username)
 
             if session["role"] == "teacher":
                 return redirect(url_for("teacher_dashboard"))
@@ -284,6 +292,7 @@ def student_dashboard():
 
     username = session.get("user")
     return render_template("student_dashboard.html", username=username)
+
 
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
@@ -313,7 +322,7 @@ def quiz():
         username = session.get("user")
         users[username]["score"] = score
 
-        logging.info(f"Quiz completed by {username}. Score: {score}/15")
+        logging.info("Quiz completed by %s. Score: %s/15", username, score)
 
         return render_template(
             "quiz.html",
@@ -340,7 +349,7 @@ def reset_score():
 
     username = session.get("user")
     users[username]["score"] = 0
-    logging.info(f"Score reset by user: {username}")
+    logging.info("Score reset by user: %s", username)
 
     return redirect(url_for("student_dashboard"))
 
@@ -358,10 +367,10 @@ def teacher_dashboard():
 def logout():
     user = session.get("user", "unknown")
     session.clear()
-    logging.info(f"User logged out: {user}")
+    logging.info("User logged out: %s", user)
     return redirect(url_for("login"))
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    
+    debug_mode = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
+    app.run(debug=debug_mode)
