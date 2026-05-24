@@ -85,5 +85,5 @@ The project follows DevSecOps principles by integrating security into developmen
 
 Pipeline stages:
 
-```text
+
 Build → Security Scan → Test → Deploy Simulation
