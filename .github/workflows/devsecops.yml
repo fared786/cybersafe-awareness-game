@@ -1,0 +1,44 @@
+name: DevSecOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-security-test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Build - Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build - Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Security Scan - Bandit SAST
+        run: |
+          bandit -r src -ll
+
+      - name: Security Scan - Dependency Audit
+        run: |
+          pip-audit || true
+
+      - name: Test - Run Pytest
+        run: |
+          pytest
+
+      - name: Deploy - Simulation
+        run: |
+          echo "Deployment simulation successful."
+          echo "In a real environment, this stage would deploy to a secure staging server."
