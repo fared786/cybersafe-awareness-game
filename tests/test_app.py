@@ -45,3 +45,13 @@ def test_valid_login_redirects_to_twofa():
     )
     assert response.status_code == 302
     assert "/twofa" in response.headers["Location"]
+    
+    
+def test_security_headers_present():
+    tester = app.test_client()
+    response = tester.get("/login")
+
+    assert response.headers["X-Frame-Options"] == "DENY"
+    assert response.headers["X-Content-Type-Options"] == "nosniff"
+    assert "Content-Security-Policy" in response.headers
+    assert "Permissions-Policy" in response.headers

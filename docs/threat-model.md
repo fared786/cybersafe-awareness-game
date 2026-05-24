@@ -42,6 +42,8 @@ The application includes authentication, role-based access control, two-factor a
 | Security Misconfiguration | GitHub Actions pipeline checks the app automatically |
 | Vulnerable and Outdated Components | pip-audit checks dependency vulnerabilities |
 | Software and Data Integrity Failures | CI/CD pipeline validates code before deployment simulation |
+| Cross-Site Scripting | Content-Security-Policy restricts script execution sources |
+| Security Misconfiguration | Security headers reduce unsafe default browser behaviour |
 
 ## 6. Ethical Scope
 

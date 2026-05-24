@@ -34,7 +34,7 @@ Result:
 5 passed
 
 
-## 9. Incident Response Simulation Result
+## 4. Incident Response Simulation Result
 
 A simulated failed-login incident was performed to test monitoring and response capability.
 
@@ -44,3 +44,17 @@ A simulated failed-login incident was performed to test monitoring and response 
 | Unauthorized dashboard access | Access should be denied | User redirected to login page | Passed |
 
 The incident simulation confirmed that the application can detect and record basic authentication-related security events.
+
+## 5. Security Header Testing
+
+Security headers were added to improve browser-side protection and demonstrate secure coding practice.
+
+| Security Header | Purpose | Status |
+|---|---|---|
+| X-Frame-Options | Helps prevent clickjacking | Implemented |
+| X-Content-Type-Options | Helps prevent MIME sniffing | Implemented |
+| Referrer-Policy | Reduces unnecessary referrer leakage | Implemented |
+| Permissions-Policy | Restricts browser features such as camera and microphone | Implemented |
+| Content-Security-Policy | Restricts allowed content sources | Implemented |
+
+These headers support secure configuration and reduce common web application risks.
