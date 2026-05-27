@@ -90,11 +90,11 @@ Build → Security Scan → Test → Deploy Simulation
 
 ## Team Members and Contributions
 
-| Team Member | Role | Main Contributions |
-|---|---|---|
-| Farhad Hossain | Lead Developer / Security Tester / DevSecOps Implementer | Project setup, Flask application development, login system, 2FA flow, RBAC, quiz system, scoring, achievement badges, SQLite progress tracking, security logs page, security headers, automated pytest tests, GitHub Actions CI/CD pipeline, Bandit SAST evidence, pip-audit dependency scanning evidence, incident response simulation, security remediation, screenshots, and technical evidence |
-| Ujwal paudel | Documentation / Testing Support | Supported documentation review, screenshots, user testing, quiz content review, and project evidence checking |
-| Team Member 3 | Presentation / Review Support | Supported presentation preparation, slide review, demo flow practice, and final project checking |
+| Team Member | Student ID | Contribution | Main Contributions |
+|---|---|---:|---|
+| Farhad Hossain | cihe240509 | 33.34% | Lead technical implementation; Flask backend; login; RBAC; 2FA demo; quiz logic; SQLite progress tracking; security headers; GitHub Actions pipeline; Bandit, pip-audit, and Pytest integration; troubleshooting pipeline and security issues; incident response simulation. |
+| Ujwal Paudel | cihe240544 | 33.33% | Documentation support; requirements review; testing evidence preparation; functional testing support; README review; report and presentation content support. |
+| Samir Raut | cihe240444 | 33.33% | UI review; quiz content review; screenshot evidence support; testing results documentation; threat model and risk analysis support; presentation preparation. |
 
 ## Key Deliverables Completed
 
